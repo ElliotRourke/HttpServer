@@ -1,18 +1,14 @@
 package org.elliot;
 
-import javax.net.ServerSocketFactory;
-import java.net.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.net.ServerSocket;
+import java.net.UnknownHostException;
 
 public class MyHttpServer {
-    public static void main(String[] args) {
-        try (ExecutorService executorService = Executors.newFixedThreadPool(4)) {
-            final SocketAddress socketAddress = new InetSocketAddress(InetAddress.getLocalHost(), 8080);
-            final ConnectionHandler connectionHandler = new ConnectionHandler(socketAddress);
-
+    public static void main(String[] args) throws UnknownHostException {
+        try (ServerSocket serverSocket = new ServerSocket(8080)) {
+            final ConnectionHandler connectionHandler = new ConnectionHandler(serverSocket);
             while (true) {
-//                connectionHandler.handleConnection();
+                connectionHandler.handleConnection();
             }
         } catch (Exception e) {
             //TODO: handle errors

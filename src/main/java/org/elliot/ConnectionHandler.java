@@ -1,30 +1,37 @@
 package org.elliot;
 
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
-import java.net.SocketAddress;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 public class ConnectionHandler {
 
-    private final SocketAddress socketAddress;
+    private final ServerSocket serverSocket;
 
-    public ConnectionHandler(SocketAddress socketAddress) {
-        this.socketAddress = socketAddress;
+    public ConnectionHandler(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void handleConnection() {
-        try (ServerSocket serverSocket = new ServerSocket(8080)){
-            serverSocket.bind(socketAddress);
-            try (InputStream inputStream = serverSocket.accept().getInputStream()) {
-
+            try (Socket client = serverSocket.accept()) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()))) {
+                    System.out.println("Entering");
+//                    String line;
+//                    while (( line = reader.readLine()) != null) {
+//                        System.out.println(line);
+//                    }
+                    reader
+                            .lines()
+                            .forEach(System.out::println);
+                    System.out.println("Exiting");
+                } catch (Exception e) {
+                    throw new RuntimeException("Inputstream failure!", e);
+                }
             } catch (Exception e) {
-                throw new RuntimeException("Inputstream failure!");
+                throw new RuntimeException("Client failure!", e);
             }
-        } catch (Exception e) {
-            //TODO: handle errors
-            e.printStackTrace();
-        }
     }
 }
