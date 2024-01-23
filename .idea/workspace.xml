@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c296cb-7fc5-46a2-a87b-20451be3c872" name="Changes" comment="Adding multi-connection support">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/elliot/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/elliot/ConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/elliot/MyHttpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/elliot/MyHttpServer.java" afterDir="false" />
-    </list>
+    <list default="true" id="13c296cb-7fc5-46a2-a87b-20451be3c872" name="Changes" comment="Updating to use executor service" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -134,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706049899842</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updating to use executor service">
+      <option name="closed" value="true" />
+      <created>1706050049971</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706050049971</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -143,6 +147,7 @@
     <MESSAGE value="Creating skeleton of server" />
     <MESSAGE value="Fleshing out basics" />
     <MESSAGE value="Adding multi-connection support" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding multi-connection support" />
+    <MESSAGE value="Updating to use executor service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating to use executor service" />
   </component>
 </project>
