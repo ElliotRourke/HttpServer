@@ -1,17 +1,16 @@
 package org.elliot;
 
 import java.net.ServerSocket;
-import java.net.UnknownHostException;
+import java.net.Socket;
 
 public class MyHttpServer {
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket( 8080)) {
-            final ConnectionHandler connectionHandler = new ConnectionHandler(serverSocket);
+            System.out.println("Server started!");
             while (true) {
-                connectionHandler.handleConnection();
+                new ConnectionHandler(serverSocket.accept()).start();
             }
         } catch (Exception e) {
-            //TODO: handle errors
             e.printStackTrace();
         }
     }

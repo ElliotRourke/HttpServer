@@ -10,19 +10,18 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class ConnectionHandler {
+public class ConnectionHandler extends Thread {
 
-    private final ServerSocket serverSocket;
+    private final Socket client;
 
-    public ConnectionHandler(ServerSocket serverSocket) {
-        this.serverSocket = serverSocket;
+    public ConnectionHandler(Socket client) {
+        this.client = client;
     }
 
-    public void handleConnection() {
+    private void handleConnection() {
             try (
-                    Socket client = serverSocket.accept();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()))
+                    PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true)
             ) {
                 String input;
                 String output;
@@ -32,10 +31,18 @@ public class ConnectionHandler {
                 while((input = reader.readLine()) != null) {
                     output = "I have received your input!";
                     writer.println(output);
+                    if ("shutdown".equalsIgnoreCase(input)) {
+                        writer.println("Goodbye!");
+                        break;
+                    }
                 }
-
             } catch (Exception e) {
                 throw new RuntimeException("Client failure!", e);
             }
+    }
+
+    @Override
+    public void run() {
+        handleConnection();
     }
 }
