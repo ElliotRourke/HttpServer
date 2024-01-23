@@ -10,7 +10,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class ConnectionHandler extends Thread {
+public class ConnectionHandler implements Runnable {
 
     private final Socket client;
 
